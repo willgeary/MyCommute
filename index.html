@@ -59,9 +59,10 @@ Sandcastle.addDefaultToolbarButton('Restart', function() {
     viewer.dataSources.add(Cesium.CzmlDataSource.load('Apps/Data/nyctojfk3.czml'));
     
     viewer.scene.camera.setView({
-        destination:  Cesium.Cartesian3.fromDegrees(-73.9, 40.7, 55000),
+        destination:  Cesium.Cartesian3.fromDegrees(-74.01, 40.60, 8000),
         orientation: {
-            heading: 9.5
+            heading: Cesium.Math.toRadians(10),
+            pitch: 100
         }
     });
 });
