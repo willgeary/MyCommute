@@ -30,9 +30,22 @@ function startup(Cesium) {
     'use strict';
 //Sandcastle_Begin
 
-Cesium.BingMapsApi.defaultKey = 'At2y8wTp7i2xyPBsYXYUHrLOk-ZOmQMiT7-JTU140HRP_9exxYuA4DIZIhK_NxzU';
+//Cesium.BingMapsApi.defaultKey = 'At2y8wTp7i2xyPBsYXYUHrLOk-ZOmQMiT7-JTU140HRP_9exxYuA4DIZIhK_NxzU';
+
+//var viewer = new Cesium.Viewer('cesiumContainer');
+
 
 var viewer = new Cesium.Viewer('cesiumContainer');
+var cesiumTerrainProviderMeshes = new Cesium.CesiumTerrainProvider({
+    url : 'https://assets.agi.com/stk-terrain/world',
+    requestWaterMask : true,
+    requestVertexNormals : true
+});
+viewer.terrainProvider = cesiumTerrainProviderMeshes;
+
+
+
+viewer.scene.globe.depthTestAgainstTerrain = true;
 
 
 
@@ -55,7 +68,7 @@ Sandcastle.addToolbarButton('Satellites', function() {
 
 
 
-Sandcastle.addDefaultToolbarButton('Restart', function() {
+Sandcastle.addDefaultToolbarButton('Source 1', function() {
     viewer.dataSources.add(Cesium.CzmlDataSource.load('Apps/Data/nyctojfk3.czml'));
     
     viewer.scene.camera.setView({
@@ -66,6 +79,35 @@ Sandcastle.addDefaultToolbarButton('Restart', function() {
         }
     });
 });
+
+Sandcastle.addToolbarButton('Source 2', function() {
+    viewer.dataSources.add(Cesium.CzmlDataSource.load('Apps/Data/nyctojfk2.czml'));
+    
+    viewer.scene.camera.setView({
+        destination:  Cesium.Cartesian3.fromDegrees(-74.01, 40.60, 8000),
+        orientation: {
+            heading: Cesium.Math.toRadians(10),
+            pitch: 100
+        }
+    });
+});
+
+/*
+var showPaths = true;
+Sandcastle.addToolbarButton('Toggle paths', function() {
+    showPaths = !showPaths;
+    var entities = czmlDataSource.entities.entities;
+    for(var i = 0, len = entities.length; i < len; i++) {
+        var entity = entities[i];
+        if(entity.path) {
+            entity.path.show = new Cesium.ConstantProperty(showPaths);
+        }
+    }
+});
+*/
+
+
+
 
 Sandcastle.reset = function() {
     viewer.dataSources.removeAll();

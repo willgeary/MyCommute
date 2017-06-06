@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta name="description" content="A simple CZML example showing four satellites in orbit around the Earth, and some ground objects.">
+    <meta name="description" content="Visualizing the Michigan Dataset">
     <meta name="cesium-sandcastle-labels" content="Showcases, DataSources">
     <title>My Commute</title>
     <script type="text/javascript" src="../Sandcastle/Sandcastle-header.js"></script>
@@ -34,18 +34,18 @@ function startup(Cesium) {
 
 Cesium.BingMapsApi.defaultKey = 'At2y8wTp7i2xyPBsYXYUHrLOk-ZOmQMiT7-JTU140HRP_9exxYuA4DIZIhK_NxzU';
 
-var viewer = new Cesium.Viewer('cesiumContainer');
+/*var viewer = new Cesium.Viewer('cesiumContainer');*/
 
 
 
-/*
+
 var viewer = new Cesium.Viewer('cesiumContainer', {
     imageryProvider : new Cesium.BingMapsImageryProvider({
         url : 'https://dev.virtualearth.net',
-        mapStyle : Cesium.BingMapsStyle.AERIAL
+        mapStyle : Cesium.BingMapsStyle.AERIAL_WITH_LABELS
     }),
     baseLayerPicker : false
-});*/
+});
 
 
 /*
@@ -58,12 +58,13 @@ Sandcastle.addToolbarButton('Satellites', function() {
 
 
 Sandcastle.addDefaultToolbarButton('Restart', function() {
-    viewer.dataSources.add(Cesium.CzmlDataSource.load('../Data/nyctojfk3.czml'));
+    viewer.dataSources.add(Cesium.CzmlDataSource.load('../Data/michigan_2.czml'));
     
     viewer.scene.camera.setView({
-        destination:  Cesium.Cartesian3.fromDegrees(-73.9, 40.7, 55000),
+        destination:  Cesium.Cartesian3.fromDegrees(-83.7430, 42.2808, 125000),
         orientation: {
-            heading: 9.5
+            heading: Cesium.Math.toRadians(0),
+            pitch : Cesium.Math.toRadians(-90)
         }
     });
 });
